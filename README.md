@@ -1,0 +1,2 @@
+# curesupport-theme
+Shopblender Theme
