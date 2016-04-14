@@ -1,0 +1,86 @@
+body {
+    background-color: #fff;
+    border-top: 4px solid #000;
+}
+
+header {
+    padding: 4px 0;
+}
+
+header .top {
+    overflow: auto;
+}
+
+header .right {
+    margin-top: 38px;
+}
+
+header .logo {
+    margin: 4px 0px;
+    display: inline-block;
+}
+
+a {
+    color: #747474;
+}
+
+.box {
+    display: inline-block;
+    text-align: center;
+}
+
+.box.red {
+    background-color: red;
+    margin-right: 8px;
+}
+
+.cart .box {
+    float: left;
+    height: 42px;
+    width: 50px;
+}
+
+.cart .box .fa {
+    line-height: 42px;
+    color: #fff;
+    font-size: 22px;
+}
+
+.cart > div {
+    display: inline-block;
+}
+
+.cart .title {
+    text-transform: uppercase;
+    color: red;
+    font-weight: bold;
+}
+
+nav {
+    background-color: #333;
+}
+
+nav ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul > li > a {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    font-weight: bold;
+}
+
+section.content h2 {
+    color: red;
+    text-transform: uppercase;
+    font-size: 22px;
+    padding: 0px 0px 10px 0px;
+    border-bottom: 1px solid #000;
+    margin: 10px 0px 10px 0px;
+}

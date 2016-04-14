@@ -1,0 +1,68 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('layerslider/css/layerslider.css') }}" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+{% endblock %}
+
+{% block body %}
+    <header>
+        <div class="container">
+            <div class="top">
+                {% for locale in shop.locales %}
+                    <img src="{{ 'http://lipis.github.io/flag-icon-css/flags/4x3/' ~ locale ~ '.svg' }}" height="16"/>
+                {% endfor %}
+
+                <ul class="pull-right list-inline links">
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        <li>
+                            <a href="{{ path('mango_account_profile_show') }}">My account</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('mango_user_security_logout') }}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ path('mango_user_security_login') }}">Login</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('mango_user_registration') }}">Create an account</a>
+                        </li>
+                    {% endif %}
+                    <li><a href="{{ path('mango_homepage') }}">Home</a></li>
+                    <li><a href="#">Producten</a></li>
+                    <li><a href="#">Over Ons</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <a href="{{ path('mango_homepage') }}">
+                <img class="logo" src="{{ asset('images/logo.jpg') }}"/>
+            </a>
+            <div class="right pull-right">
+                <div class="cart">
+                    <a href="{{ path('mango_cart_summary') }}" class="box red"><span class="fa fa-shopping-cart"></span></a>
+                    <div>
+                        <div class="title">Winkelwagen</div>
+                        <div class="info">Geen producten</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <nav>
+        <div class="container">
+            <ul>
+                {#{% for taxon in shop.settings.navigation %}#}
+                    {#<li><a href="#">VPC</a></li>#}
+                {#{% endfor %}#}
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <section class="content">
+            {% block content %}{% endblock %}
+        </section>
+    </div>
+{% endblock %}

@@ -1,0 +1,7 @@
+name: Default theme
+settings:
+    "Navigation":
+        settings:
+            navigation:
+                type: taxon
+                label: "My navigation"
