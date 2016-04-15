@@ -1,0 +1,29 @@
+{% extends '@theme/layout2.html.twig' %}
+
+{% block right_content %}
+    <h2>{{ taxon.name }}</h2>
+
+    <p>{{ taxon.description|raw }}</p>
+
+    <div class="row">
+        {% for product in taxon.products %}
+            <div class="col-xs-4">
+                <div class="product-box">
+                    <a href="{{ path(product) }}">
+                        <img src="{{ media_display_url(product.media.first) }}" height="100"/>
+                    </a>
+                    <a href="{{ path(product) }}"><h4>{{ product.name }}</h4></a>
+                    <br>
+                    <div class="pull-left">
+                        <span class="price">{{ product.price|sylius_price }}</span>
+                    </div>
+                    <div class="pull-right">
+                        <a href="{{ path(product) }}" class="btn btn-primary">Info</a>
+                        <button class="btn btn-primary">Bestel</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

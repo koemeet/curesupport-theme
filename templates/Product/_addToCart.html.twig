@@ -1,0 +1,31 @@
+{% set form = sylius_cart_form({'product': product}) %}
+
+<form action="{{ path('mango_cart_item_add', {'id': product.id}) }}" method="post" class="clearfix">
+    {% if not product.hasVariants and not sylius_inventory_is_available(product.masterVariant) %}
+        <span class="label label-warning">{{ 'sylius.out_of_stock'|trans }}</span>
+    {% else %}
+        {{ form_widget(form._token) }}
+        <div class="pull-left" style="margin-right: 10px;">
+            <div class="row">
+                <div class="col-xs-4">
+                    {{ form_label(form.quantity) }}
+                </div>
+                <div class="col-xs-8">
+                    {{ form_widget(form.quantity, { 'empty_value': '1' }) }}
+                </div>
+            </div>
+        </div>
+        <div class="pull-left">
+            {% if sylius_is_restricted(product) %}
+                <button disabled="disabled" class="btn btn-primary"><i
+                            class="icon-shopping-cart icon-white icon-large"></i> {{ 'sylius.product_not_available_in_zone'|trans }}
+                </button>
+            {% else %}
+                <button type="submit" class="btn btn-primary"><i
+                            class="icon-shopping-cart icon-white icon-large"></i> {{ 'Bestellen'|trans }}
+                </button>
+            {% endif %}
+        </div>
+    {% endif %}
+    </div>
+</form>

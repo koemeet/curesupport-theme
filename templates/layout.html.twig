@@ -4,6 +4,7 @@
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('layerslider/css/layerslider.css') }}" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ asset('style.css') }}">
 {% endblock %}
 
@@ -12,7 +13,14 @@
         <div class="container">
             <div class="top">
                 {% for locale in shop.locales %}
-                    <img src="{{ 'http://lipis.github.io/flag-icon-css/flags/4x3/' ~ locale ~ '.svg' }}" height="16"/>
+                    {% if locale == 'en_US' %}
+                        {% set _locale = 'gb' %}
+                    {% else %}
+                        {% set _locale = locale %}
+                    {% endif %}
+                    <a href="{{ path('mango_locale_change', { locale: locale }) }}">
+                        <img src="http://lipis.github.io/flag-icon-css/flags/4x3/{{ _locale }}.svg" height="16"/>
+                    </a>
                 {% endfor %}
 
                 <ul class="pull-right list-inline links">
@@ -31,10 +39,15 @@
                             <a href="{{ path('mango_user_registration') }}">Create an account</a>
                         </li>
                     {% endif %}
-                    <li><a href="{{ path('mango_homepage') }}">Home</a></li>
-                    <li><a href="#">Producten</a></li>
-                    <li><a href="#">Over Ons</a></li>
-                    <li><a href="#">Contact</a></li>
+                    {% for menu in shop.settings.top_menu.children %}
+                        <li>
+                            <a href="{{ path(menu.route) }}">{{ menu.label }}</a>
+                        </li>
+                    {% endfor %}
+                    {#<li><a href="{{ path('mango_homepage') }}">Home</a></li>#}
+                    {#<li><a href="#">Producten</a></li>#}
+                    {#<li><a href="#">Over Ons</a></li>#}
+                    {#<li><a href="#">Contact</a></li>#}
                 </ul>
             </div>
             <a href="{{ path('mango_homepage') }}">
@@ -44,8 +57,14 @@
                 <div class="cart">
                     <a href="{{ path('mango_cart_summary') }}" class="box red"><span class="fa fa-shopping-cart"></span></a>
                     <div>
-                        <div class="title">Winkelwagen</div>
-                        <div class="info">Geen producten</div>
+                        <div class="title"><a href="{{ path('mango_cart_summary') }}">Winkelwagen</a></div>
+                        <div class="info">
+                            {% set cart = sylius_cart_get() %}
+                            <div>{{ cart.totalQuantity }} Product(en)</div>
+                            <div>
+                                {{ cart.total|sylius_price }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -54,15 +73,37 @@
     <nav>
         <div class="container">
             <ul>
-                {#{% for taxon in shop.settings.navigation %}#}
-                    {#<li><a href="#">VPC</a></li>#}
-                {#{% endfor %}#}
+                {% for taxon in shop.settings.navigation %}
+                    <li><a href="{{ path(taxon) }}">{{ taxon.name }}</a></li>
+                {% endfor %}
             </ul>
         </div>
     </nav>
-    <div class="container">
-        <section class="content">
+    <section class="content">
+        <div class="container">
             {% block content %}{% endblock %}
-        </section>
-    </div>
+        </div>
+    </section>
+    <footer>
+        <h2 class="information">Algemene informatie</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    {{ render_block('block_1') }}
+                </div>
+                <div class="col-md-3">
+                    {{ render_block('block_2') }}
+                </div>
+                <div class="col-md-3">
+                    {{ render_block('block_3') }}
+                </div>
+                <div class="col-md-3">
+                    {{ render_block('block_4') }}
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+
+        </div>
+    </footer>
 {% endblock %}

@@ -5,3 +5,8 @@ settings:
             navigation:
                 type: taxon
                 label: "My navigation"
+    "Bestsellers":
+        settings:
+            best_sellers_taxon:
+                type: taxon
+                label: "Bestsellers"
