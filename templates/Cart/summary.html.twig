@@ -39,21 +39,21 @@
                         <strong>{{ 'mango.order.shipping_total'|trans }}</strong>: {{ shippingTotal|sylius_price }}
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="4">
-                        <p><strong>{{ 'mango.order.taxes'|trans }}</strong></p>
-                        <ul>
-                            {% for taxLabel, taxAmount in sylius_aggregate_adjustments(cart.getAdjustmentsRecursively('tax')) %}
-                                <li>{{ taxLabel }} {{ taxAmount|sylius_price }} </li>
-                            {% else %}
-                                <li><span class="label label-info">{{ 'sylius.order.no_taxes'|trans }}</span></li>
-                            {% endfor %}
-                        </ul>
-                    </td>
-                    <td colspan="2" style="text-align: right;">
-                        <strong>{{ 'mango.order.tax_total'|trans }}</strong>: {{ cart.getAdjustmentsTotalRecursively('tax')|sylius_price }}
-                    </td>
-                </tr>
+                {#<tr>#}
+                    {#<td colspan="4">#}
+                        {#<p><strong>{{ 'mango.order.taxes'|trans }}</strong></p>#}
+                        {#<ul>#}
+                            {#{% for taxLabel, taxAmount in sylius_aggregate_adjustments(cart.getAdjustmentsRecursively('tax')) %}#}
+                                {#<li>{{ taxLabel }} {{ taxAmount|sylius_price }} </li>#}
+                            {#{% else %}#}
+                                {#<li><span class="label label-info">{{ 'sylius.order.no_taxes'|trans }}</span></li>#}
+                            {#{% endfor %}#}
+                        {#</ul>#}
+                    {#</td>#}
+                    {#<td colspan="2" style="text-align: right;">#}
+                        {#<strong>{{ 'mango.order.tax_total'|trans }}</strong>: {{ cart.getAdjustmentsTotalRecursively('tax')|sylius_price }}#}
+                    {#</td>#}
+                {#</tr>#}
                 <tr>
                     <td colspan="6" style="text-align: right;">
                         <strong>{{ 'mango.cart.summary.grand_total'|trans }}</strong>: {{ cart.total|sylius_price }}

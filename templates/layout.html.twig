@@ -41,7 +41,7 @@
                     {% endif %}
                     {% for menu in shop.settings.top_menu.children %}
                         <li>
-                            <a href="{{ path(menu.route) }}">{{ menu.label }}</a>
+                            <a href="{{ path(menu) }}">{{ menu.label }}</a>
                         </li>
                     {% endfor %}
                     {#<li><a href="{{ path('mango_homepage') }}">Home</a></li>#}

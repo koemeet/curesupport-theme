@@ -3,7 +3,7 @@
 {% block right_content %}
     <h2>{{ product.name }}</h2>
     <div class="row">
-        <div class="col-xs-4"><img src="{{ media_display_url(product.media.first) }}" class="img-responsive"/></div>
+        <div class="col-xs-4"><img src="{{ media_display_url(product.media.first.media) }}" class="img-responsive"/></div>
         <div class="col-xs-8">
             <div class="text-right">
                 <div class="box gray pricing">
@@ -24,4 +24,33 @@
         </div>
         <div class="price">{{ product.price|sylius_price }}</div>
     </div>
+
+    <hr>
+
+    {% set association = product.associations.first %}
+    {% if association %}
+        <h2>{{ association.type.name }}</h2>
+        <div class="row">
+            {% for product in association.products %}
+                <div class="col-xs-4">
+                    <div class="product-box">
+                        <a href="{{ path(product) }}">
+                            <img src="{{ media_display_url(product.media.first) }}" height="100"/>
+                        </a>
+                        <a href="{{ path(product) }}"><h4>{{ product.name }}</h4></a>
+                        <br>
+                        <div class="pull-left">
+                            <span class="price">{{ product.price|sylius_price }}</span>
+                        </div>
+                        <div class="pull-right">
+                            <a href="{{ path(product) }}" class="btn btn-primary">Info</a>
+                            <button class="btn btn-primary">Bestel</button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
 {% endblock %}
