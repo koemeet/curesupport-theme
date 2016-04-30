@@ -9,8 +9,10 @@
                 <div class="title">{{ bestsellers.name }}</div>
                 {% for product in bestsellers.products %}
                     <div class="item">
-                        <img src="http://www.curesupportwebshop.nl/Files/5/18000/18518/ProductPhotos/Large/211242813.jpg"
-                             class="thumb" height="72"/>
+                        <div style="min-width: 60px;">
+                            <img src="{{ media_display_url(product.media.first.media) }}"
+                                 class="thumb" height="72"/>
+                        </div>
                         <div class="info">
                             <a href="{{ path(product) }}" class="title">{{ product.name }}</a>
                             <span class="price">&euro; 39,99</span>

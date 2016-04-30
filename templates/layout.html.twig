@@ -16,7 +16,7 @@
                     {% if locale == 'en_US' %}
                         {% set _locale = 'gb' %}
                     {% else %}
-                        {% set _locale = locale %}
+                        {% set _locale = locale|slice(3, 2)|lower %}
                     {% endif %}
                     <a href="{{ path('mango_locale_change', { locale: locale }) }}">
                         <img src="http://lipis.github.io/flag-icon-css/flags/4x3/{{ _locale }}.svg" height="16"/>
@@ -81,6 +81,17 @@
     </nav>
     <section class="content">
         <div class="container">
+            {% block flashes %}
+                {% for type in ['success', 'error', 'notice'] %}
+                    {% for flash in app.session.flashbag.get(type) %}
+                        <div class="alert alert-{{ type == 'error' ? 'danger' : type == 'notice' ? 'warning' : type }}">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            {{ flash|trans }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            {% endblock %}
+
             {% block content %}{% endblock %}
         </div>
     </section>

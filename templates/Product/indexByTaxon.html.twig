@@ -10,18 +10,21 @@
             {% set form = sylius_cart_form({'product': product}) %}
 
             <div class="col-xs-4">
-                <div class="product-box">
+                <div class="product-box" style="margin-top: 30px;">
                     <a href="{{ path(product) }}">
                         <img src="{{ media_display_url(product.media.first.media) }}" height="100"/>
                     </a>
-                    <a href="{{ path(product) }}"><h4>{{ product.name }}</h4></a>
+                    <div style="min-height: 50px; margin-top: 10px;">
+                        <a href="{{ path(product) }}"><h4>{{ product.name }}</h4></a>
+                    </div>
                     <br>
                     <div class="pull-left">
                         <span class="price">{{ product.price|sylius_price }}</span>
                     </div>
                     <div class="pull-right">
                         <a href="{{ path(product) }}" class="btn btn-primary">Info</a>
-                        <form action="{{ path('mango_cart_item_add', {'id': product.id}) }}" method="post" class="clearfix pull-left" style="margin-right: 4px;">
+                        <form action="{{ path('mango_cart_item_add', {'id': product.id}) }}" method="post"
+                              class="clearfix pull-left" style="margin-right: 4px;">
                             {{ form_widget(form._token) }}
                             {{ form_widget(form.quantity, { 'empty_value': '1', 'type': 'hidden' }) }}
                             <button type="submit" class="btn btn-primary">{{ 'Bestel'|trans }}</button>

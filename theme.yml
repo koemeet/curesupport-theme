@@ -5,6 +5,9 @@ settings:
             navigation:
                 type: taxon
                 label: "My navigation"
+            top_menu:
+                type: menu
+                label: "Top menu"
     "Bestsellers":
         settings:
             best_sellers_taxon:
